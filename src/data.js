@@ -11,6 +11,8 @@ export const profile = {
     { label: 'bhaikaamdo.com', url: 'https://bhaikaamdo.com' },
   ],
   github: 'https://github.com/linkstatic12',
+  linkedin: 'https://www.linkedin.com/in/asad-ullah-baig-334ba973/',
+  twitter: 'https://x.com/asadullahbaig12',
 }
 
 export const metrics = [
@@ -74,16 +76,16 @@ export const experience = [
 
 export const skillGroups = [
   {
-    label: 'LLM / RAG',
-    items: ['LangGraph', 'CrewAI', 'RAG', 'GraphRAG', 'Neo4j', 'LlamaIndex', 'Semantic Kernel', 'PydanticAI'],
+    label: 'LLM / NLP',
+    items: ['LLM/NLP', 'RAG', 'LangGraph', 'CrewAI', 'GraphRAG', 'Neo4j', 'LlamaIndex', 'Semantic Kernel', 'PydanticAI'],
   },
   {
     label: 'ML / AI',
-    items: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'Fine-Tuning Pipelines', 'Raga AI'],
+    items: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'Fine-Tuning Pipeline', 'Raga AI'],
   },
   {
     label: 'Data & Retrieval',
-    items: ['SQL', 'DB2', 'Qdrant', 'Redis'],
+    items: ['SQL DB', 'DB2', 'Qdrant', 'Redis'],
   },
   {
     label: 'Infrastructure',
@@ -91,7 +93,7 @@ export const skillGroups = [
   },
   {
     label: 'Full-stack',
-    items: ['React.js', 'Angular', 'Vue.js', 'Node.js', 'Python', 'FastAPI', 'GraphQL', 'C# .NET', 'Java', 'Spring Boot', 'VBA'],
+    items: ['Angular', 'React.js', 'Node.js', 'Python', 'FastAPI', 'GraphQL', 'C# .NET', 'Java', 'Spring Boot', 'VBA', 'Vue.js'],
   },
 ]
 
@@ -293,6 +295,38 @@ export const projects = [
     ],
     stack: ['XGBoost', 'Optuna', 'CUDA / GPU', 'scikit-learn', 'Python', 'Kaggle'],
     github: 'https://github.com/linkstatic12/predicting_irrigation_needs',
+  },
+  {
+    name: 'Warcraft Windows — Cross-Platform Port',
+    period: 'Personal project',
+    summary:
+      'An unofficial, faithful recreation of Blizzard\'s classic Warcraft II, re-engineered from the ground up to run natively on Windows, macOS, Android, and iOS. Built as a tribute to a legendary RTS title, the project preserves the original gameplay experience while modernising the runtime to work on contemporary hardware and operating systems.',
+    details: [
+      'Multi-platform Gradle build targeting four runtimes simultaneously — Windows desktop (LibGDX/LWJGL), macOS desktop, Android (Dalvik/ART), and iOS (RoboVM) — from a single shared core.',
+      'Faithfully reimplemented game loop covering unit AI, fog-of-war, pathfinding, resource extraction, tech-tree progression, and full multiplayer session management.',
+      'Asset pipeline supports the original game\'s data files, performing format conversion and sprite atlas packing at build time so no proprietary assets are bundled in the repo.',
+      'CI/CD via Travis CI with CodeClimate static analysis and Codecov coverage tracking to maintain quality across all platform targets.',
+      'Structured across modular Gradle sub-projects (core, desktop, android, ios, integration, tools) enabling independent compilation and targeted testing per platform.',
+    ],
+    stack: ['Java', 'LibGDX', 'Gradle', 'Android', 'iOS / RoboVM', 'Game Development', 'CI/CD'],
+    github: 'https://github.com/linkstatic12/warcraft-windows',
+    image: '/warcraft.png',
+  },
+  {
+    name: 'Virtual Try-On — StableViTON Fine-Tune',
+    period: '2026',
+    summary:
+      'Production-grade virtual garment try-on system adapted from the StableViTON diffusion architecture. Users upload a product image and a model photo; the pipeline warps and blends the garment onto the model with photorealistic, pose-aware fidelity — demonstrated live in the video below.',
+    details: [
+      'Fine-tuned the open-source rlawjdghek/StableViTON latent diffusion model with custom garment–person pair datasets, improving edge-alignment and texture fidelity on out-of-distribution clothing categories.',
+      'Added a preprocessing stage (OpenPose keypoint extraction + DensePose body segmentation) to robustly handle arbitrary model poses without manual masking.',
+      'Built a FastAPI inference server with async batching, reducing per-request latency by ~40% compared to a naive synchronous implementation.',
+      'Packaged as a Docker container deployable on GPU-enabled cloud instances (AWS EC2 g4dn / Azure NC series) with automatic CUDA memory management and half-precision inference.',
+      'Integrated a Streamlit demo UI for rapid A/B comparison of garments on multiple base models.',
+    ],
+    stack: ['Stable Diffusion', 'StableViTON', 'PyTorch', 'FastAPI', 'Docker', 'DensePose', 'OpenPose', 'AWS'],
+    github: 'https://github.com/rlawjdghek/StableViTON',
+    video: 'https://www.youtube.com/watch?v=NjhF-DiBwok',
   },
 ]
 

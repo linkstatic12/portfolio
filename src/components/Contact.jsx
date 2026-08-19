@@ -1,70 +1,110 @@
 import { profile } from '../data.js'
-import Divider from './Divider.jsx'
 
 export default function Contact() {
-  return (
-    <section id="contact" className="relative bg-surface/40 px-6 pb-16 pt-2 md:pb-20">
-      <Divider flip />
-      <div className="mx-auto max-w-6xl pt-6">
-        <div className="rounded-3xl border border-line-soft bg-panel p-8 shadow-sm md:p-12">
-          <p className="text-[12px] font-medium uppercase tracking-[0.16em] text-signal">
-            Open to work
-          </p>
-          <h2 className="display mt-4 max-w-xl text-3xl font-semibold tracking-tight text-ink md:text-4xl">
-            Let's build something that scales.
-          </h2>
-          <p className="mt-4 max-w-lg text-[15px] leading-relaxed text-muted">
-            Open to AI engineering, ML infrastructure, and full-stack roles. Reach out directly or
-            find the code on GitHub.
-          </p>
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const data = new FormData(e.target)
+    const subject = encodeURIComponent(data.get('subject') || 'Portfolio inquiry')
+    const body = encodeURIComponent(`Name: ${data.get('name')}\n\n${data.get('message')}`)
+    window.open(`mailto:${profile.email}?subject=${subject}&body=${body}`)
+  }
 
-          <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <a
-              href={`mailto:${profile.email}`}
-              className="flex items-center justify-between rounded-full border border-line-soft bg-base/70 px-4 py-3 text-sm text-ink transition hover:border-signal-dim hover:text-signal"
+  return (
+    <section
+      id="contact"
+      className="snap-section"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        textAlign: 'center',
+        minHeight: '100dvh',
+        padding: '6rem 1.5rem 2rem',
+      }}
+    >
+      <h3 className="section-label">Contact</h3>
+
+      <div style={{ maxWidth: '36rem', width: '100%' }}>
+        <h4 style={{ fontSize: 'clamp(1.1rem, 3vw, 2rem)', fontWeight: 600, marginBottom: '2rem' }}>
+          I have got just what you need.{' '}
+          <span className="green-underline">Let's talk.</span>
+        </h4>
+
+        {/* Contact info */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
+          {[
+            { icon: '📞', label: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` },
+            { icon: '✉️', label: profile.email, href: `mailto:${profile.email}` },
+            { icon: '📍', label: profile.location },
+          ].map(({ icon, label, href }) => (
+            <div
+              key={label}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
             >
-              <span>{profile.email}</span>
-              <span className="text-dim">→</span>
-            </a>
-            <a
-              href={`tel:${profile.phone.replace(/\s/g, '')}`}
-              className="flex items-center justify-between rounded-full border border-line-soft bg-base/70 px-4 py-3 text-sm text-ink transition hover:border-signal-dim hover:text-signal"
-            >
-              <span>{profile.phone}</span>
-              <span className="text-dim">→</span>
-            </a>
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              className="flex items-center justify-between rounded-full border border-line-soft bg-base/70 px-4 py-3 text-sm text-ink transition hover:border-signal-dim hover:text-signal"
-            >
-              <span>github.com/linkstatic12</span>
-              <span className="text-dim">↗</span>
-            </a>
-            {profile.sites.map((s) => (
-              <a
-                key={s.url}
-                href={s.url}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center justify-between rounded-full border border-line-soft bg-base/70 px-4 py-3 text-sm text-ink transition hover:border-signal-dim hover:text-signal"
-              >
-                <span>{s.label}</span>
-                <span className="text-dim">↗</span>
-              </a>
-            ))}
-          </div>
+              <span style={{ fontSize: '1.2rem', color: '#68B2A0' }}>{icon}</span>
+              {href ? (
+                <a href={href} style={{ fontSize: '1rem', color: '#242424', textDecoration: 'none' }}>{label}</a>
+              ) : (
+                <p style={{ fontSize: '1rem', color: '#242424', margin: 0 }}>{label}</p>
+              )}
+            </div>
+          ))}
         </div>
 
-        <footer className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-line-soft pt-6 text-[12px] text-dim sm:flex-row">
-          <span>© {new Date().getFullYear()} {profile.name}. Built from Ghent, Belgium.</span>
-          <span className="flex items-center gap-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-signal animate-breathe" />
-            Open to opportunities
-          </span>
-        </footer>
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <input name="name" placeholder="Name" className="contactInput" type="text" required />
+              <input name="email" placeholder="Email" className="contactInput" type="email" required />
+            </div>
+            <input name="subject" placeholder="Subject" className="contactInput" type="text" style={{ width: '100%' }} />
+            <textarea
+              name="message"
+              placeholder="Message"
+              className="contactInput"
+              rows={4}
+              style={{ width: '100%', resize: 'vertical' }}
+            />
+          </div>
+          <button
+            type="submit"
+            style={{
+              background: '#68B2A0',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '0.5rem',
+              padding: '12px 40px',
+              fontWeight: 700,
+              fontSize: '1rem',
+              cursor: 'pointer',
+              transition: 'background 0.2s',
+            }}
+            onMouseEnter={(e) => { e.target.style.background = '#4a9a87' }}
+            onMouseLeave={(e) => { e.target.style.background = '#68B2A0' }}
+          >
+            Submit
+          </button>
+        </form>
       </div>
+
+      {/* Footer scroll-to-top */}
+      <a
+        href="#hero"
+        style={{ position: 'absolute', bottom: '1.25rem', left: '50%', transform: 'translateX(-50%)', cursor: 'pointer' }}
+      >
+        <div className="scroll-top-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24" height="24">
+            <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+            <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+          </svg>
+        </div>
+      </a>
     </section>
   )
 }

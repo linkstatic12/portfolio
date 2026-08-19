@@ -1,82 +1,121 @@
-import { profile } from '../data.js'
-import Divider from './Divider.jsx'
+import { TypeAnimation } from 'react-type-animation'
 
 export default function Hero() {
   return (
-    <>
-      {/* ── Hunza Origin Banner ── */}
-      <div className="hunza-banner">
-        <div className="hunza-banner-inner">
-          <span className="hunza-flag">🏔️</span>
-          <span className="hunza-banner-text">
-            Proudly from <strong>Hunza Valley, Gilgit-Baltistan, Pakistan</strong> — Heaven on Earth
-          </span>
-          <span className="hunza-flag">🌸</span>
-        </div>
+    <section
+      id="hero"
+      className="snap-section"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        minHeight: '100dvh',
+        overflow: 'hidden',
+        paddingTop: '0',
+        marginTop: '-80px', /* pull up behind sticky header */
+      }}
+    >
+      {/* Animated rings */}
+      <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '1.5rem' }}>
+        {/* rings behind the image */}
+        {[200, 300, 500].map((size, i) => (
+          <span
+            key={size}
+            className={`ring-ping ring-ping-${i + 1}`}
+            style={{
+              position: 'absolute',
+              border: '1px solid #B0B0B0',
+              borderRadius: '50%',
+              width: size,
+              height: size,
+              opacity: 0.3,
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              display: 'block',
+            }}
+          />
+        ))}
+        <span
+          style={{
+            position: 'absolute',
+            border: '1px solid #68B2A0',
+            borderRadius: '50%',
+            width: 510,
+            height: 510,
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            opacity: 0.15,
+          }}
+          className="ring-pulse"
+        />
+
+        {/* Profile image */}
+        <img
+          src="/moron.jpeg"
+          alt="Asadullah Baig"
+          style={{
+            position: 'relative',
+            borderRadius: '50%',
+            width: 128,
+            height: 128,
+            objectFit: 'cover',
+            objectPosition: 'top',
+            zIndex: 1,
+          }}
+        />
       </div>
 
-      <section id="top" className="hero-section relative overflow-hidden">
-        {/* Hunza background image with overlay */}
-        <div className="hero-bg-image" />
-        <div className="hero-bg-overlay" />
+      {/* Text */}
+      <div style={{ zIndex: 10 }}>
+        <h2 style={{
+          fontSize: '0.8rem',
+          textTransform: 'uppercase',
+          letterSpacing: '0.15em',
+          color: '#6b7280',
+          marginBottom: '0.5rem',
+        }}>
+          AI Engineer &amp; Researcher
+        </h2>
 
-        <div className="relative mx-auto max-w-6xl px-6 pb-16 pt-16 md:pb-20 md:pt-24">
-          <p
-            className="animate-rise text-[13px] font-medium uppercase tracking-[0.18em] text-hunza-spring"
-            style={{ animationDelay: '0ms' }}
-          >
-            Certified Data Scientist · AI Engineer · Fullstack Developer
-          </p>
+        <h1 style={{
+          fontSize: 'clamp(1.5rem, 5vw, 3.5rem)',
+          fontWeight: 600,
+          color: '#242424',
+          padding: '0 1.5rem',
+          marginBottom: '1.25rem',
+          lineHeight: 1.15,
+        }}>
+          <TypeAnimation
+            sequence={[
+              "Hi, the name is Asadullah Baig",
+              2000,
+              "And I'm addicted to doing research",
+              2000,
+              "I like to build cool things",
+              2000,
+            ]}
+            wrapper="span"
+            speed={50}
+            deletionSpeed={60}
+            repeat={Infinity}
+            cursor={true}
+            style={{ display: 'inline-block' }}
+          />
+        </h1>
 
-          <h1
-            className="animate-rise display mt-5 max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl"
-            style={{ animationDelay: '90ms' }}
-          >
-            {profile.name}
-          </h1>
-
-          <p
-            className="animate-rise mt-4 max-w-2xl text-lg text-white/80 md:text-xl"
-            style={{ animationDelay: '160ms' }}
-          >
-            {profile.role}
-          </p>
-
-          <p
-            className="animate-rise mt-5 max-w-xl text-[15px] leading-relaxed text-white/70"
-            style={{ animationDelay: '220ms' }}
-          >
-            {profile.tagline}
-          </p>
-
-          <div
-            className="animate-rise mt-8 flex flex-wrap items-center gap-3"
-            style={{ animationDelay: '280ms' }}
-          >
-            <a
-              href="#experience"
-              className="rounded-full bg-hunza-pine px-5 py-2.5 text-sm font-medium text-white transition hover:bg-hunza-pine-deep"
-            >
-              View experience
+        {/* Nav buttons */}
+        <div style={{ marginTop: '1.25rem' }}>
+          {['About', 'Experience', 'Skills', 'Projects'].map((label) => (
+            <a key={label} href={`#${label.toLowerCase()}`}>
+              <button className="heroButton">{label}</button>
             </a>
-            <a
-              href="#contact"
-              className="rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-5 py-2.5 text-sm text-white transition hover:bg-white/20"
-            >
-              {profile.location}
-            </a>
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-5 py-2.5 text-sm text-white transition hover:bg-white/20"
-            >
-              GitHub ↗
-            </a>
-          </div>
+          ))}
         </div>
-        <Divider />
-      </section>
-    </>
+      </div>
+    </section>
   )
 }

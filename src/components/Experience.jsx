@@ -1,49 +1,98 @@
 import { experience } from '../data.js'
-import SectionHeading from './SectionHeading.jsx'
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 py-16 md:py-20">
-      <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="Journey" title="Experience" />
+    <section
+      id="experience"
+      className="snap-section"
+      style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}
+    >
+      <h3 className="section-label">Experience</h3>
 
-        <div className="mt-10 space-y-5">
-          {experience.map((job) => (
-            <article
-              key={job.company}
-              className="grid grid-cols-1 gap-x-8 gap-y-3 rounded-2xl border border-line-soft bg-panel p-6 shadow-sm md:grid-cols-[160px_1fr] md:p-7"
-            >
-              <div className="text-[13px] text-dim">
-                <div className="font-medium text-signal">{job.period}</div>
-                <div className="mt-1">{job.location}</div>
-              </div>
-              <div>
-                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                  <h3 className="display text-lg font-semibold text-ink">{job.company}</h3>
-                  <span className="text-[13.5px] text-muted">{job.role}</span>
-                </div>
-                <ul className="mt-4 space-y-2.5">
-                  {job.points.map((p, idx) => (
-                    <li key={idx} className="flex gap-3 text-[14.5px] leading-relaxed text-muted">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-signal/60" />
-                      <span>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {job.stack.map((s) => (
-                    <span
-                      key={s}
-                      className="rounded-full border border-line-soft bg-surface px-2.5 py-1 text-[12px] text-muted"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+      {/* Horizontal scroll carousel */}
+      <div style={{
+        width: '100%',
+        height: '75%',
+        display: 'flex',
+        gap: '1.25rem',
+        overflowX: 'scroll',
+        overflowY: 'hidden',
+        scrollSnapType: 'x mandatory',
+        padding: '6rem 2.5rem 2.5rem',
+        alignItems: 'center',
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'rgba(104,178,160,0.8) rgba(180,180,180,0.2)',
+        marginTop: 'auto',
+        marginBottom: 'auto',
+      }}>
+        {experience.map((job) => (
+          <article key={job.company} className="exp-card">
+            {/* Company logo placeholder → initials badge */}
+            <div style={{
+              width: 64,
+              height: 64,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #68B2A0, #2d6a4f)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: '1.2rem',
+              flexShrink: 0,
+              marginBottom: '0.5rem',
+            }}>
+              {job.company.charAt(0)}
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+              <h4 style={{ fontSize: 'clamp(1rem, 2.5vw, 1.5rem)', fontWeight: 300, color: '#111827' }}>
+                {job.role}
+              </h4>
+              <p style={{ fontWeight: 700, fontSize: 'clamp(0.9rem, 2vw, 1.2rem)', color: '#68B2A0', marginTop: 2 }}>
+                {job.company}
+              </p>
+              <p style={{ textTransform: 'uppercase', fontSize: '0.8rem', color: '#9ca3af', margin: '8px 0' }}>
+                {job.period} · {job.location}
+              </p>
+            </div>
+
+            {/* Stack tags */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '0.75rem' }}>
+              {job.stack.map((s) => (
+                <span key={s} style={{
+                  background: 'rgba(104,178,160,0.15)',
+                  border: '1px solid rgba(104,178,160,0.35)',
+                  borderRadius: '6px',
+                  padding: '2px 8px',
+                  fontSize: '0.72rem',
+                  color: '#374151',
+                }}>
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            {/* Points */}
+            <ul style={{
+              listStyle: 'disc',
+              paddingLeft: '1.25rem',
+              color: '#374151',
+              fontSize: '0.85rem',
+              lineHeight: 1.6,
+              textAlign: 'justify',
+              overflowY: 'auto',
+              maxHeight: '180px',
+              scrollbarWidth: 'thin',
+              scrollbarColor: 'rgba(104,178,160,0.6) rgba(200,200,200,0.2)',
+              gap: '0.5rem',
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              {job.points.map((p, idx) => <li key={idx}>{p}</li>)}
+            </ul>
+          </article>
+        ))}
       </div>
     </section>
   )
