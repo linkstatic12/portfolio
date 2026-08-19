@@ -371,7 +371,7 @@ export default function Projects() {
       style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}
     >
       {/* Heading with project count */}
-      <h3 className="section-label">
+      <h3 className="section-label" style={{ top: '2.5rem' }}>
         Projects
         <span style={{
           marginLeft: '0.6rem',
@@ -472,7 +472,7 @@ export default function Projects() {
                 {/* Links */}
                 <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', marginTop: '0.875rem', flexWrap: 'wrap' }}>
                   {p.github && <LinkBtn href={p.github} label="GitHub ↗" />}
-                  {p.demo   && <LinkBtn href={p.demo}   label={p.demoLabel || 'Live Demo ↗'} />}
+                  {p.demo && <LinkBtn href={p.demo} label={p.demoLabel || 'Live Demo ↗'} />}
                   {p.video && !videoId && <LinkBtn href={p.video} label="Video ↗" />}
                 </div>
               </div>
