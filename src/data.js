@@ -96,15 +96,36 @@ export const skillGroups = [
 ]
 
 export const certifications = [
-  { name: 'Claude with the Anthropic API', org: 'Anthropic', date: 'May 2026' },
-  { name: 'IBM AI Developer', org: 'IBM · Coursera', date: 'Apr 2026' },
-  { name: 'IBM Data Science', org: 'IBM · Coursera', date: 'Mar 2026' },
-  { name: 'Machine Learning with Python', org: 'IBM · Coursera', date: 'Mar 2026' },
+  {
+    name: 'Claude with the Anthropic API',
+    org: 'Anthropic',
+    date: 'May 2026',
+    verifyUrl: 'https://verify.skilljar.com/c/mccnb6rcubpm',
+  },
+  {
+    name: 'IBM AI Developer',
+    org: 'IBM · Coursera',
+    date: 'Apr 2026',
+    verifyUrl: 'https://coursera.org/verify/professional-cert/D4CLONJ2DTZC',
+  },
+  {
+    name: 'IBM Data Science',
+    org: 'IBM · Coursera',
+    date: 'Mar 2026',
+    verifyUrl: 'https://coursera.org/verify/professional-cert/NATIHRPVAIS7',
+  },
+  {
+    name: 'Machine Learning with Python',
+    org: 'IBM · Coursera',
+    date: 'Mar 2026',
+    verifyUrl: 'https://coursera.org/verify/H4VCEY3B0RVM',
+  },
   {
     name: 'EITCA/AI — Artificial Intelligence Programme',
     org: 'EITCA, Brussels',
     date: 'Nov 2025',
     detail: '24 ECTS credits — umbrella academy credential covering the 10 EITC exams below',
+    verifyUrl: 'https://www.eitci.org/validate',
     components: [
       { code: 'EITC/AI/ADL', label: 'Advanced Deep Learning', score: '80%' },
       { code: 'EITC/AI/ARL', label: 'Advanced Reinforced Learning', score: '73.33%' },
@@ -123,12 +144,14 @@ export const certifications = [
     org: 'EITCI, Brussels',
     date: 'Nov 2025',
     detail: 'Examination result: 73.33%',
+    verifyUrl: 'https://www.eitci.org/validate',
   },
   {
     name: 'EITC/CP/PPF — Python Programming Fundamentals',
     org: 'EITCI, Brussels',
     date: 'Oct 2025',
     detail: 'Examination result: 66.67%',
+    verifyUrl: 'https://www.eitci.org/validate',
   },
 ]
 
@@ -186,6 +209,53 @@ export const projects = [
     ],
     stack: ['Raspberry Pi', 'MultiWii / MSP', 'Serial Comms', 'Python'],
     github: 'https://github.com/linkstatic12/Raspiwii',
+  },
+  {
+    name: 'CLIP — Media Intelligence Vault',
+    period: '2026',
+    summary:
+      'SaaS media intelligence vault: analyze, store, and search media assets using AI-generated metadata.',
+    details: [
+      'Streamlit-based interface for uploading media and generating searchable AI metadata over the asset library.',
+      'Deployed as a running Hugging Face Space for interactive demoing.',
+    ],
+    stack: ['Streamlit', 'CLIP / Embeddings', 'Media Metadata', 'Search'],
+    demo: 'https://huggingface.co/spaces/linkstatic1/clip',
+    demoLabel: 'Hugging Face Space ↗',
+    video: 'https://youtu.be/-g1v2wsxlGc',
+  },
+  {
+    name: 'AI Marketplace — Admin Dashboard',
+    period: '2026',
+    summary: 'Admin dashboard for an AI-marketplace platform, deployed as a React single-page app on Vercel.',
+    details: [
+      'Internal admin interface for managing the AI Marketplace platform\u2019s listings and operations.',
+    ],
+    stack: ['React', 'Vercel'],
+    demo: 'https://aimarketplace-phi.vercel.app/admin',
+    demoLabel: 'Live admin ↗',
+  },
+  {
+    name: 'Home Automation Dashboard',
+    period: 'Personal project',
+    summary:
+      'Web-based home automation interface to monitor and manage smart devices — lights, fans, and a security hub — across rooms.',
+    details: [
+      'Dedicated room views for Bedroom, Drawing Room, Garage, and Kitchen with visual status indicators for lights, ceiling and pedestal fans, and a central hub.',
+      'Front-door and porch-light security monitoring, plus PHP backend services for user/employee access and reporting.',
+      'Responsive, touch-friendly frontend built with Bootstrap and jQuery Mobile over a PHP + SQL backend.',
+    ],
+    stack: ['PHP', 'SQL', 'Bootstrap', 'jQuery Mobile'],
+    github: 'https://github.com/linkstatic12/homeautomation2',
+  },
+  {
+    name: 'Storytime',
+    period: 'Personal project',
+    summary: 'Android (Kotlin/Gradle) storytelling app project.',
+    details: ['Native Android app scaffolded with Kotlin and Gradle for an interactive storytelling experience.'],
+    stack: ['Kotlin', 'Android', 'Gradle'],
+    github: 'https://github.com/linkstatic12/storytime-app',
+    video: 'https://www.youtube.com/shorts/232nYX1t5q0',
   },
 ]
 

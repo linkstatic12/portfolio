@@ -3,23 +3,23 @@ import SectionHeading from './SectionHeading.jsx'
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="border-b border-line px-6 py-20 md:py-28">
+    <section id="certifications" className="bg-surface/40 px-6 py-16 md:py-20">
       <div className="mx-auto max-w-6xl">
-        <SectionHeading eyebrow="verified" title="Certifications" />
+        <SectionHeading eyebrow="Verified" title="Certifications" />
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {certifications.map((c) => (
             <div
               key={c.name}
-              className="group relative flex flex-col overflow-hidden rounded-lg border border-line bg-panel/60 p-5 transition hover:border-signal-dim"
+              className="flex flex-col rounded-2xl border border-line-soft bg-panel p-5 shadow-sm transition hover:border-signal-dim"
             >
-              <div className="mono flex items-center gap-2 text-[11px] text-signal">
+              <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.1em] text-signal">
                 <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-                verified
+                Verified
               </div>
               <h3 className="mt-3 text-[15px] font-medium leading-snug text-ink">{c.name}</h3>
               {c.detail && <p className="mt-2 text-[12.5px] leading-relaxed text-muted">{c.detail}</p>}
-              <div className="mono mt-3 flex items-center justify-between text-[12px] text-dim">
+              <div className="mt-3 flex items-center justify-between text-[12px] text-dim">
                 <span>{c.org}</span>
                 <span>{c.date}</span>
               </div>
@@ -29,12 +29,22 @@ export default function Certifications() {
                     <span
                       key={comp.code}
                       title={`${comp.label} — ${comp.score}`}
-                      className="mono rounded border border-line-soft bg-base/60 px-1.5 py-1 text-[10.5px] text-dim"
+                      className="rounded-full border border-line-soft bg-base/70 px-2 py-1 text-[10.5px] text-dim"
                     >
                       {comp.code} <span className="text-signal-dim">{comp.score}</span>
                     </span>
                   ))}
                 </div>
+              )}
+              {c.verifyUrl && (
+                <a
+                  href={c.verifyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-4 inline-flex w-fit items-center gap-1 rounded-full border border-line-soft px-3 py-1.5 text-[12px] text-muted transition hover:border-signal-dim hover:text-signal"
+                >
+                  View certificate ↗
+                </a>
               )}
             </div>
           ))}
