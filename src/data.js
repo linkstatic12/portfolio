@@ -100,30 +100,35 @@ export const certifications = [
     name: 'Claude with the Anthropic API',
     org: 'Anthropic',
     date: 'May 2026',
+    orgLogo: '/cert-anthropic.png',
     verifyUrl: 'https://verify.skilljar.com/c/mccnb6rcubpm',
   },
   {
     name: 'IBM AI Developer',
     org: 'IBM · Coursera',
     date: 'Apr 2026',
+    orgLogo: '/cert-ibm.png',
     verifyUrl: 'https://coursera.org/verify/professional-cert/D4CLONJ2DTZC',
   },
   {
     name: 'IBM Data Science',
     org: 'IBM · Coursera',
     date: 'Mar 2026',
+    orgLogo: '/cert-ibm.png',
     verifyUrl: 'https://coursera.org/verify/professional-cert/NATIHRPVAIS7',
   },
   {
     name: 'Machine Learning with Python',
     org: 'IBM · Coursera',
     date: 'Mar 2026',
+    orgLogo: '/cert-ibm.png',
     verifyUrl: 'https://coursera.org/verify/H4VCEY3B0RVM',
   },
   {
     name: 'EITCA/AI — Artificial Intelligence Programme',
     org: 'EITCA, Brussels',
     date: 'Nov 2025',
+    orgLogo: '/cert-eitci.png',
     detail: '24 ECTS credits — umbrella academy credential covering the 10 EITC exams below',
     verifyUrl: 'https://www.eitci.org/validate',
     components: [
@@ -143,6 +148,7 @@ export const certifications = [
     name: 'EITC/CL/GCP — Google Cloud Platform',
     org: 'EITCI, Brussels',
     date: 'Nov 2025',
+    orgLogo: '/cert-eitci.png',
     detail: 'Examination result: 73.33%',
     verifyUrl: 'https://www.eitci.org/validate',
   },
@@ -150,6 +156,7 @@ export const certifications = [
     name: 'EITC/CP/PPF — Python Programming Fundamentals',
     org: 'EITCI, Brussels',
     date: 'Oct 2025',
+    orgLogo: '/cert-eitci.png',
     detail: 'Examination result: 66.67%',
     verifyUrl: 'https://www.eitci.org/validate',
   },
@@ -169,6 +176,7 @@ export const projects = [
     ],
     stack: ['LoRA', 'GRPO', 'TRL', 'PEFT', 'Nemotron-H', 'PyTorch', 'Blackwell/CUDA'],
     github: 'https://github.com/linkstatic12/NVIDIA-nemotron-3-reasoning',
+    image: '/proj-nemotron.png',
   },
   {
     name: 'RSNA Knee Abnormality Detection',
@@ -183,6 +191,7 @@ export const projects = [
     ],
     stack: ['DINOv2', 'ResNet-50', 'Medical Imaging', 'DICOM', 'Ensemble Learning', 'NLP'],
     github: 'https://github.com/linkstatic12/RNSA_knee_abormality_model',
+    image: '/proj-rsna.png',
   },
   {
     name: 'ShariaGPT',
@@ -197,6 +206,8 @@ export const projects = [
     ],
     stack: ['RAG', 'FastAPI', 'Qdrant', 'Redis', 'OpenRouter', 'Compliance'],
     github: 'https://github.com/linkstatic12/shariagpt',
+    demo: 'https://shariagpt.onrender.com/',
+    image: '/shariagpt.png',
   },
   {
     name: 'Raspiwii',
@@ -205,10 +216,13 @@ export const projects = [
       'Python bridge between a Raspberry Pi and a MultiWii flight controller over serial/USB using the MultiWii Serial Protocol (MSP).',
     details: [
       'Reads and writes MSP frames over the flight controller\u2019s USB-serial link, enabling telemetry capture and control experiments directly from a Raspberry Pi.',
-      'Lightweight, dependency-light (pyserial) implementation aimed at engineers experimenting with flight-controller internals.',
+      'Implements the full MultiWii Serial Protocol (MSP) command set — querying sensor data (gyro, accelerometer, altitude), motor outputs, and RC channel values in real time.',
+      'Designed as a bidirectional bridge: Pi can arm/disarm the controller, set PID gains, and stream raw attitude data for logging or closed-loop control experiments.',
+      'Lightweight, dependency-light (pyserial) implementation aimed at engineers experimenting with flight-controller internals without proprietary tooling.',
     ],
     stack: ['Raspberry Pi', 'MultiWii / MSP', 'Serial Comms', 'Python'],
     github: 'https://github.com/linkstatic12/Raspiwii',
+    image: '/proj-raspiwii.png',
   },
   {
     name: 'CLIP — Media Intelligence Vault',
@@ -225,15 +239,32 @@ export const projects = [
     video: 'https://youtu.be/-g1v2wsxlGc',
   },
   {
+    name: 'Storytime',
+    period: 'Personal project',
+    summary:
+      'Native Android storytelling application built using Jetpack Compose, featuring interactive audio narration and parent-controlled limits.',
+    details: [
+      'Designed with Jetpack Compose, Dagger Hilt, and Firebase Firestore, incorporating Lottie animations for an immersive, child-friendly UX.',
+      'Built-in parent dashboard featuring custom screen-time limits, profile creation, and multi-language support (English/Urdu).',
+    ],
+    stack: ['Kotlin', 'Android', 'Gradle'],
+    github: 'https://github.com/linkstatic12/storytime-app',
+    video: 'https://www.youtube.com/shorts/232nYX1t5q0',
+  },
+  {
     name: 'AI Marketplace — Admin Dashboard',
     period: '2026',
-    summary: 'Admin dashboard for an AI-marketplace platform, deployed as a React single-page app on Vercel.',
+    summary: 'Full-featured admin dashboard for an AI-marketplace SaaS platform — real-time seller analytics, multi-channel revenue tracking, and AI-driven store audits, deployed as a React SPA on Vercel.',
     details: [
-      'Internal admin interface for managing the AI Marketplace platform\u2019s listings and operations.',
+      'Real-time KPI cards tracking profit, return rate (FIT), sell-through rate (STR), deadstock value, and platform ROAS with live delta indicators.',
+      'Revenue intelligence module with daily/weekly/monthly area charts and an AI forecast engine surfacing +12.4% growth projections.',
+      'Channel Pulse panel — aggregated acquisition metrics across Instagram Shop, TikTok Shop, WhatsApp Business, and Online Store with ROAS and sales multipliers.',
+
     ],
-    stack: ['React', 'Vercel'],
+    stack: ['React', 'Vercel', 'Chart.js', 'REST API'],
     demo: 'https://aimarketplace-phi.vercel.app/admin',
     demoLabel: 'Live admin ↗',
+    image: '/proj-ai-marketplace.png',
   },
   {
     name: 'Home Automation Dashboard',
@@ -247,15 +278,21 @@ export const projects = [
     ],
     stack: ['PHP', 'SQL', 'Bootstrap', 'jQuery Mobile'],
     github: 'https://github.com/linkstatic12/homeautomation2',
+    image: '/iot-home.png',
   },
   {
-    name: 'Storytime',
-    period: 'Personal project',
-    summary: 'Android (Kotlin/Gradle) storytelling app project.',
-    details: ['Native Android app scaffolded with Kotlin and Gradle for an interactive storytelling experience.'],
-    stack: ['Kotlin', 'Android', 'Gradle'],
-    github: 'https://github.com/linkstatic12/storytime-app',
-    video: 'https://www.youtube.com/shorts/232nYX1t5q0',
+    name: 'Predicting Irrigation Needs',
+    period: '2026',
+    summary:
+      'GPU-accelerated XGBoost classification pipeline for the Kaggle Playground Series S6E4, predicting irrigation need (Low / Medium / High) with a 0.9735 OOF Balanced Accuracy on dual T4 hardware.',
+    details: [
+      'Custom feature engineering — Heat_Stress_Index, Evaporation_Potential, and Moisture_Rain_Interaction derived from raw temperature, humidity, soil-moisture, and rainfall signals.',
+      'XGBClassifier with tree_method=\'hist\' and device=\'cuda\', trained on a 5-fold StratifiedKFold split with balanced sample weights to handle class imbalance.',
+      'Parallel Optuna hyperparameter search — 30 trials (n_jobs=2) targeting balanced accuracy; final logit-based probability bias tuning for further metric lift.',
+      'Achieved ~0.9735 OOF Balanced Accuracy; output: submission_dual_t4_optimized.csv for Kaggle submission.',
+    ],
+    stack: ['XGBoost', 'Optuna', 'CUDA / GPU', 'scikit-learn', 'Python', 'Kaggle'],
+    github: 'https://github.com/linkstatic12/predicting_irrigation_needs',
   },
 ]
 

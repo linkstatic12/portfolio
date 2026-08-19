@@ -11,14 +11,34 @@ export default function Certifications() {
           {certifications.map((c) => (
             <div
               key={c.name}
-              className="flex flex-col rounded-2xl border border-line-soft bg-panel p-5 shadow-sm transition hover:border-signal-dim"
+              className="flex flex-col rounded-2xl border border-line-soft bg-panel shadow-sm transition hover:border-signal-dim overflow-hidden"
             >
-              <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.1em] text-signal">
-                <span className="h-1.5 w-1.5 rounded-full bg-signal" />
-                Verified
+              {/* Card header: logo left, name + badge right */}
+              <div className="flex items-center gap-4 border-b border-line-soft bg-base/60 px-5 py-4">
+                {c.orgLogo && (
+                  <div
+                    className="shrink-0 flex items-center justify-center rounded-lg border border-line-soft bg-panel"
+                    style={{ width: '56px', height: '56px', padding: '8px' }}
+                  >
+                    <img
+                      src={c.orgLogo}
+                      alt={`${c.org} logo`}
+                      className="max-h-full max-w-full object-contain"
+                      style={{ filter: 'brightness(1.1) contrast(1.05)' }}
+                    />
+                  </div>
+                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.1em] text-signal">
+                    <span className="h-1.5 w-1.5 rounded-full bg-signal" />
+                    Verified
+                  </div>
+                  <h3 className="mt-1 text-[14px] font-semibold leading-snug text-ink">{c.name}</h3>
+                </div>
               </div>
-              <h3 className="mt-3 text-[15px] font-medium leading-snug text-ink">{c.name}</h3>
-              {c.detail && <p className="mt-2 text-[12.5px] leading-relaxed text-muted">{c.detail}</p>}
+
+              <div className="flex flex-col p-5 flex-1">
+              {c.detail && <p className="text-[12.5px] leading-relaxed text-muted">{c.detail}</p>}
               <div className="mt-3 flex items-center justify-between text-[12px] text-dim">
                 <span>{c.org}</span>
                 <span>{c.date}</span>
@@ -46,6 +66,7 @@ export default function Certifications() {
                   View certificate ↗
                 </a>
               )}
+              </div>
             </div>
           ))}
         </div>

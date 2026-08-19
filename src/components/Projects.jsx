@@ -1,5 +1,6 @@
 import { projects } from '../data.js'
 import SectionHeading from './SectionHeading.jsx'
+import VideoPlayer from './VideoPlayer.jsx'
 
 export default function Projects() {
   return (
@@ -7,11 +8,11 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl">
         <SectionHeading eyebrow="Builds" title="Projects" />
 
-        <div className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2">
+        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
           {projects.map((p) => (
             <article
               key={p.name}
-              className="flex flex-col rounded-2xl border border-line-soft bg-panel p-6 shadow-sm transition hover:border-signal-dim"
+              className="project-card flex flex-col rounded-2xl border border-line-soft bg-panel p-6 shadow-sm transition hover:border-signal-dim"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -39,7 +40,7 @@ export default function Projects() {
                       {p.demoLabel || 'Live demo ↗'}
                     </a>
                   )}
-                  {p.video && (
+                  {p.video && !p.videoEmbed && (
                     <a
                       href={p.video}
                       target="_blank"
@@ -62,6 +63,25 @@ export default function Projects() {
                   </li>
                 ))}
               </ul>
+
+              {/* Embedded YouTube player */}
+              {p.video && (
+                <div className="mt-5">
+                  <VideoPlayer url={p.video} />
+                </div>
+              )}
+
+              {/* Project screenshot / preview image */}
+              {p.image && (
+                <div className="mt-5 overflow-hidden rounded-xl border border-line-soft" style={{ maxHeight: '220px' }}>
+                  <img
+                    src={p.image}
+                    alt={`${p.name} preview`}
+                    className="w-full object-cover object-top transition duration-500 hover:scale-105"
+                    style={{ height: '220px' }}
+                  />
+                </div>
+              )}
 
               <div className="mt-5 flex flex-wrap gap-2">
                 {p.stack.map((s) => (

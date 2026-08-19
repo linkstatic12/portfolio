@@ -1,26 +1,51 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Work+Sans:wght@300;400;500;600&display=swap');
 
+/* ────────────────────────────────────────────
+   Hunza Valley Design Tokens
+   Inspired by: deep pine greens, turquoise
+   glacier rivers, golden autumn poplars,
+   apricot-blossom pinks, and Karakoram stone.
+──────────────────────────────────────────── */
 @theme {
   --font-display: "Fraunces", ui-serif, Georgia, serif;
   --font-mono: "Work Sans", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
 
-  --color-base: #eef1e4;
-  --color-surface: #e6ead8;
-  --color-panel: #f8f9f2;
-  --color-line: #d6dbc5;
-  --color-line-soft: #e2e6d4;
+  /* ── Surface / Base ── */
+  --color-base: #edf2ea;
+  --color-surface: #e4ede0;
+  --color-panel: #f4f8f1;
+  --color-line: #c8d9c0;
+  --color-line-soft: #d8e5d0;
 
-  --color-ink: #29352b;
-  --color-muted: #5c6a54;
-  --color-dim: #8a9680;
+  /* ── Ink ── */
+  --color-ink: #1a2b1e;
+  --color-muted: #4a6050;
+  --color-dim: #7a9880;
 
-  --color-signal: #3f6c4e;
-  --color-signal-dim: #294a35;
-  --color-warn: #b08a2e;
-  --color-warn-dim: #8a6c22;
+  /* ── Hunza Pine (primary signal — deep forest green) ── */
+  --color-signal: #2d6a4f;
+  --color-signal-dim: #1b4332;
+  --color-warn: #d4a017;
+  --color-warn-dim: #a67c00;
+
+  /* ── Hunza custom palette ── */
+  --color-hunza-pine: #2d6a4f;
+  --color-hunza-pine-deep: #1b4332;
+  --color-hunza-turquoise: #0f8b8d;
+  --color-hunza-glacier: #40b4b6;
+  --color-hunza-autumn: #d4781a;
+  --color-hunza-gold: #d4a017;
+  --color-hunza-spring: #a8d5a2;
+  --color-hunza-blossom: #e8a0b4;
+  --color-hunza-stone: #8a7560;
+  --color-hunza-snow: #f0f4f2;
 }
 
+/* ────────────────────────────────────────────
+   Base Reset & Global
+──────────────────────────────────────────── */
 @layer base {
   * {
     border-color: var(--color-line);
@@ -33,29 +58,214 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     background-image:
-      radial-gradient(60% 45% at 15% 0%, rgba(63, 108, 78, 0.10), transparent 60%),
-      radial-gradient(50% 40% at 100% 10%, rgba(176, 138, 46, 0.09), transparent 60%);
+      radial-gradient(60% 45% at 15% 0%, rgba(45, 106, 79, 0.08), transparent 60%),
+      radial-gradient(50% 40% at 100% 10%, rgba(15, 139, 141, 0.07), transparent 60%),
+      radial-gradient(40% 30% at 50% 100%, rgba(212, 120, 26, 0.05), transparent 60%);
     background-repeat: no-repeat;
   }
   ::selection {
-    background: var(--color-signal);
-    color: var(--color-panel);
+    background: var(--color-hunza-turquoise);
+    color: #fff;
   }
   :focus-visible {
-    outline: 2px solid var(--color-signal);
+    outline: 2px solid var(--color-hunza-pine);
     outline-offset: 3px;
   }
 }
 
+/* ────────────────────────────────────────────
+   Components
+──────────────────────────────────────────── */
 @layer components {
-  .mono {
-    font-family: var(--font-mono);
+  .mono { font-family: var(--font-mono); }
+  .display { font-family: var(--font-display); }
+
+  /* ── Hunza Origin Banner ── */
+  .hunza-banner {
+    background: linear-gradient(
+      135deg,
+      #1b4332 0%,
+      #2d6a4f 35%,
+      #0f8b8d 65%,
+      #1b4332 100%
+    );
+    background-size: 200% 200%;
+    animation: bannerShimmer 6s ease-in-out infinite;
+    border-bottom: 1px solid rgba(15, 139, 141, 0.4);
+    padding: 10px 24px;
   }
-  .display {
-    font-family: var(--font-display);
+  .hunza-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 1152px;
+    margin: 0 auto;
+  }
+  .hunza-banner-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.92);
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+  .hunza-banner-text strong {
+    color: #a8d5a2;
+    font-weight: 600;
+  }
+  .hunza-flag {
+    font-size: 18px;
+    animation: drift 4s ease-in-out infinite;
+  }
+
+  /* ── Hero Section ── */
+  .hero-section {
+    position: relative;
+    background-color: #1a2b1e;
+    min-height: 520px;
+  }
+  .hero-bg-image {
+    position: absolute;
+    inset: 0;
+    background-image: url('/hunza-bg.png');
+    background-size: cover;
+    background-position: center 35%;
+    background-repeat: no-repeat;
+  }
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(12, 28, 18, 0.82) 0%,
+      rgba(26, 43, 30, 0.70) 40%,
+      rgba(10, 38, 38, 0.60) 75%,
+      rgba(12, 28, 18, 0.88) 100%
+    );
+  }
+
+  /* ── Hunza custom text colors for Tailwind ── */
+  .text-hunza-spring { color: var(--color-hunza-spring); }
+  .text-hunza-turquoise { color: var(--color-hunza-turquoise); }
+  .text-hunza-glacier { color: var(--color-hunza-glacier); }
+  .text-hunza-autumn { color: var(--color-hunza-autumn); }
+  .text-hunza-gold { color: var(--color-hunza-gold); }
+
+  /* ── Project card hover glow ── */
+  .project-card {
+    position: relative;
+    background: linear-gradient(145deg, var(--color-panel), rgba(212, 237, 218, 0.4));
+    border: 1px solid var(--color-line-soft);
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.25s ease,
+                border-color 0.25s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 40px rgba(45, 106, 79, 0.12),
+      0 2px 8px rgba(15, 139, 141, 0.08);
+    border-color: var(--color-hunza-pine);
+  }
+
+  /* ── Video Player Card ── */
+  .video-player-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--color-line-soft);
+    background: #0d1f14;
+    position: relative;
+  }
+
+  .video-thumb-btn {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: block;
+    cursor: pointer;
+    background: #0d1f14;
+    border: none;
+    padding: 0;
+    overflow: hidden;
+  }
+  .video-thumb-btn:hover .video-play-btn {
+    transform: translate(-50%, -50%) scale(1.12);
+    background: linear-gradient(135deg, #2d6a4f, #0f8b8d);
+    box-shadow: 0 0 28px rgba(15, 139, 141, 0.5);
+  }
+  .video-thumb-btn:hover .video-thumb-img {
+    transform: scale(1.04);
+  }
+
+  .video-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .video-thumb-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13, 31, 20, 0.25) 0%,
+      rgba(13, 31, 20, 0.65) 100%
+    );
+  }
+
+  .video-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1b4332, #0f8b8d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow:
+      0 4px 20px rgba(15, 139, 141, 0.4),
+      0 0 0 4px rgba(255,255,255,0.12);
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+    padding-left: 3px; /* optical centering for play icon */
+  }
+
+  .video-watch-label {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-sans);
+  }
+
+  .video-iframe-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .video-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
   }
 }
 
+/* ────────────────────────────────────────────
+   Animations
+──────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -63,6 +273,12 @@
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+@keyframes bannerShimmer {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 @keyframes breathe {
@@ -75,15 +291,15 @@
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 .animate-rise {
   animation: rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 @keyframes drift {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-6px); }
   100% { transform: translateY(0px); }
 }
 .animate-drift {
