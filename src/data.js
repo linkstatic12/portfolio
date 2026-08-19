@@ -166,6 +166,49 @@ export const certifications = [
 
 export const projects = [
   {
+    name: 'CLIP — Media Intelligence Vault',
+    period: '2026',
+    summary:
+      'SaaS media intelligence vault: analyze, store, and search media assets using AI-generated metadata.',
+    details: [
+      'Streamlit-based interface for uploading media and generating searchable AI metadata over the asset library.',
+      'Deployed as a running Hugging Face Space for interactive demoing.',
+    ],
+    stack: ['Streamlit', 'CLIP / Embeddings', 'Media Metadata', 'Search'],
+    demo: 'https://huggingface.co/spaces/linkstatic1/clip',
+    demoLabel: 'Hugging Face Space ↗',
+    video: 'https://youtu.be/-g1v2wsxlGc',
+  },
+  {
+    name: 'Storytime',
+    period: 'Personal project',
+    summary:
+      'Native Android storytelling application built using Jetpack Compose, featuring interactive audio narration and parent-controlled limits.',
+    details: [
+      'Designed with Jetpack Compose, Dagger Hilt, and Firebase Firestore, incorporating Lottie animations for an immersive, child-friendly UX.',
+      'Built-in parent dashboard featuring custom screen-time limits, profile creation, and multi-language support (English/Urdu).',
+    ],
+    stack: ['Kotlin', 'Android', 'Gradle'],
+    github: 'https://github.com/linkstatic12/storytime-app',
+    video: 'https://www.youtube.com/shorts/232nYX1t5q0',
+  },
+  {
+    name: 'Virtual Try-On — StableViTON Fine-Tune',
+    period: '2026',
+    summary:
+      'Production-grade virtual garment try-on system adapted from the StableViTON diffusion architecture. Users upload a product image and a model photo; the pipeline warps and blends the garment onto the model with photorealistic, pose-aware fidelity — demonstrated live in the video below.',
+    details: [
+      'Fine-tuned the open-source rlawjdghek/StableViTON latent diffusion model with custom garment–person pair datasets, improving edge-alignment and texture fidelity on out-of-distribution clothing categories.',
+      'Added a preprocessing stage (OpenPose keypoint extraction + DensePose body segmentation) to robustly handle arbitrary model poses without manual masking.',
+      'Built a FastAPI inference server with async batching, reducing per-request latency by ~40% compared to a naive synchronous implementation.',
+      'Packaged as a Docker container deployable on GPU-enabled cloud instances (AWS EC2 g4dn / Azure NC series) with automatic CUDA memory management and half-precision inference.',
+      'Integrated a Streamlit demo UI for rapid A/B comparison of garments on multiple base models.',
+    ],
+    stack: ['Stable Diffusion', 'StableViTON', 'PyTorch', 'FastAPI', 'Docker', 'DensePose', 'OpenPose', 'AWS'],
+    github: 'https://github.com/rlawjdghek/StableViTON',
+    video: 'https://www.youtube.com/watch?v=NjhF-DiBwok',
+  },
+  {
     name: 'Nemotron-3 Reasoning Pipeline',
     period: '2026',
     summary:
@@ -227,33 +270,6 @@ export const projects = [
     image: '/proj-raspiwii.png',
   },
   {
-    name: 'CLIP — Media Intelligence Vault',
-    period: '2026',
-    summary:
-      'SaaS media intelligence vault: analyze, store, and search media assets using AI-generated metadata.',
-    details: [
-      'Streamlit-based interface for uploading media and generating searchable AI metadata over the asset library.',
-      'Deployed as a running Hugging Face Space for interactive demoing.',
-    ],
-    stack: ['Streamlit', 'CLIP / Embeddings', 'Media Metadata', 'Search'],
-    demo: 'https://huggingface.co/spaces/linkstatic1/clip',
-    demoLabel: 'Hugging Face Space ↗',
-    video: 'https://youtu.be/-g1v2wsxlGc',
-  },
-  {
-    name: 'Storytime',
-    period: 'Personal project',
-    summary:
-      'Native Android storytelling application built using Jetpack Compose, featuring interactive audio narration and parent-controlled limits.',
-    details: [
-      'Designed with Jetpack Compose, Dagger Hilt, and Firebase Firestore, incorporating Lottie animations for an immersive, child-friendly UX.',
-      'Built-in parent dashboard featuring custom screen-time limits, profile creation, and multi-language support (English/Urdu).',
-    ],
-    stack: ['Kotlin', 'Android', 'Gradle'],
-    github: 'https://github.com/linkstatic12/storytime-app',
-    video: 'https://www.youtube.com/shorts/232nYX1t5q0',
-  },
-  {
     name: 'AI Marketplace — Admin Dashboard',
     period: '2026',
     summary: 'Full-featured admin dashboard for an AI-marketplace SaaS platform — real-time seller analytics, multi-channel revenue tracking, and AI-driven store audits, deployed as a React SPA on Vercel.',
@@ -311,22 +327,6 @@ export const projects = [
     stack: ['Java', 'LibGDX', 'Gradle', 'Android', 'iOS / RoboVM', 'Game Development', 'CI/CD'],
     github: 'https://github.com/linkstatic12/warcraft-windows',
     image: '/warcraft.png',
-  },
-  {
-    name: 'Virtual Try-On — StableViTON Fine-Tune',
-    period: '2026',
-    summary:
-      'Production-grade virtual garment try-on system adapted from the StableViTON diffusion architecture. Users upload a product image and a model photo; the pipeline warps and blends the garment onto the model with photorealistic, pose-aware fidelity — demonstrated live in the video below.',
-    details: [
-      'Fine-tuned the open-source rlawjdghek/StableViTON latent diffusion model with custom garment–person pair datasets, improving edge-alignment and texture fidelity on out-of-distribution clothing categories.',
-      'Added a preprocessing stage (OpenPose keypoint extraction + DensePose body segmentation) to robustly handle arbitrary model poses without manual masking.',
-      'Built a FastAPI inference server with async batching, reducing per-request latency by ~40% compared to a naive synchronous implementation.',
-      'Packaged as a Docker container deployable on GPU-enabled cloud instances (AWS EC2 g4dn / Azure NC series) with automatic CUDA memory management and half-precision inference.',
-      'Integrated a Streamlit demo UI for rapid A/B comparison of garments on multiple base models.',
-    ],
-    stack: ['Stable Diffusion', 'StableViTON', 'PyTorch', 'FastAPI', 'Docker', 'DensePose', 'OpenPose', 'AWS'],
-    github: 'https://github.com/rlawjdghek/StableViTON',
-    video: 'https://www.youtube.com/watch?v=NjhF-DiBwok',
   },
 ]
 

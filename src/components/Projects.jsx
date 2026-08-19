@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { projects } from '../data.js'
 
 /* Extract YouTube video ID from various YouTube URL formats */
@@ -13,6 +13,14 @@ function ytId(url) {
 
 /* ── Lightbox overlay ── */
 function Lightbox({ src, alt, onClose }) {
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
+
   return (
     <div
       onClick={onClose}
@@ -170,12 +178,8 @@ function YouTubePlayer({ videoId }) {
 }
 
 /* ── Expandable project image ── */
-function ProjectImage({ src, alt }) {
-  const [lightbox, setLightbox] = useState(false)
+function ProjectImage({ src, alt, isExpanded, onExpand, onClose }) {
   const [hovered, setHovered] = useState(false)
-
-  const openLightbox = useCallback(() => setLightbox(true), [])
-  const closeLightbox = useCallback(() => setLightbox(false), [])
 
   return (
     <>
@@ -192,7 +196,7 @@ function ProjectImage({ src, alt }) {
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        onClick={openLightbox}
+        onClick={onExpand}
       >
         <img
           src={src}
@@ -234,7 +238,7 @@ function ProjectImage({ src, alt }) {
         )}
       </div>
 
-      {lightbox && <Lightbox src={src} alt={alt} onClose={closeLightbox} />}
+      {isExpanded && <Lightbox src={src} alt={alt} onClose={onClose} />}
     </>
   )
 }
@@ -310,8 +314,11 @@ function ArrowBtn({ direction, onClick, disabled }) {
 }
 
 export default function Projects() {
+  const sectionRef = useRef(null)
   const carouselRef = useRef(null)
   const [current, setCurrent] = useState(0)
+  const [expandedImage, setExpandedImage] = useState(null)
+  const [inView, setInView] = useState(false)
   const total = projects.length
 
   const scrollTo = useCallback((idx) => {
@@ -320,11 +327,33 @@ export default function Projects() {
     if (slide) {
       slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' })
       setCurrent(idx)
+      setExpandedImage(null) // Close any open modal on navigation
     }
   }, [])
 
-  const prev = () => scrollTo(Math.max(0, current - 1))
-  const next = () => scrollTo(Math.min(total - 1, current + 1))
+  const prev = useCallback(() => scrollTo(Math.max(0, current - 1)), [current, scrollTo])
+  const next = useCallback(() => scrollTo(Math.min(total - 1, current + 1)), [current, total, scrollTo])
+
+  /* Track if section is visible to enable keyboard navigation */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.5 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  /* Keyboard listener for left/right arrows */
+  useEffect(() => {
+    if (!inView) return
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft') prev()
+      else if (e.key === 'ArrowRight') next()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [inView, prev, next])
 
   /* Sync the counter when the user scrolls manually */
   const handleScroll = () => {
@@ -337,6 +366,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
+      ref={sectionRef}
       className="snap-section"
       style={{ display: 'flex', flexDirection: 'column', position: 'relative', overflow: 'hidden' }}
     >
@@ -371,7 +401,13 @@ export default function Projects() {
 
               {/* Image (expandable) or YouTube player or fallback */}
               {p.image ? (
-                <ProjectImage src={p.image} alt={p.name} />
+                <ProjectImage
+                  src={p.image}
+                  alt={p.name}
+                  isExpanded={expandedImage === p.name}
+                  onExpand={() => setExpandedImage(p.name)}
+                  onClose={() => setExpandedImage(null)}
+                />
               ) : videoId ? (
                 <YouTubePlayer videoId={videoId} />
               ) : (

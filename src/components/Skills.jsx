@@ -139,7 +139,8 @@ export default function Skills() {
         textTransform: 'uppercase',
         letterSpacing: '0.08em',
         color: '#9ca3af',
-        fontSize: '0.72rem',
+        fontSize: '0.9rem',
+        fontWeight: 300,
         whiteSpace: 'nowrap',
       }}>
         Hover over a skill for current proficiency

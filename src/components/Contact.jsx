@@ -1,14 +1,6 @@
 import { profile } from '../data.js'
 
 export default function Contact() {
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const data = new FormData(e.target)
-    const subject = encodeURIComponent(data.get('subject') || 'Portfolio inquiry')
-    const body = encodeURIComponent(`Name: ${data.get('name')}\n\n${data.get('message')}`)
-    window.open(`mailto:${profile.email}?subject=${subject}&body=${body}`)
-  }
-
   return (
     <section
       id="contact"
@@ -35,62 +27,47 @@ export default function Contact() {
         {/* Contact info */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '2rem' }}>
           {[
-            { icon: '📞', label: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` },
-            { icon: '✉️', label: profile.email, href: `mailto:${profile.email}` },
-            { icon: '📍', label: profile.location },
+            {
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ width: '1.75rem', height: '1.75rem', color: '#68B2A0' }}>
+                  <path fillRule="evenodd" d="M1.5 4.5a3 3 0 013-3h1.372c.86 0 1.61.586 1.819 1.42l1.105 4.423a1.875 1.875 0 01-.694 1.955l-1.293.97c-.135.101-.164.249-.126.352a11.285 11.285 0 006.697 6.697c.103.038.25.009.352-.126l.97-1.293a1.875 1.875 0 011.955-.694l4.423 1.105c.834.209 1.42.959 1.42 1.82V19.5a3 3 0 01-3 3h-2.25C8.552 22.5 1.5 15.448 1.5 6.75V4.5z" clipRule="evenodd"></path>
+                </svg>
+              ),
+              label: profile.phone,
+              href: `tel:${profile.phone.replace(/\s/g, '')}`
+            },
+            {
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ width: '1.75rem', height: '1.75rem', color: '#68B2A0' }}>
+                  <path d="M1.5 8.67v8.58a3 3 0 003 3h15a3 3 0 003-3V8.67l-8.928 5.493a3 3 0 01-3.144 0L1.5 8.67z"></path>
+                  <path d="M22.5 6.908V6.75a3 3 0 00-3-3h-15a3 3 0 00-3 3v.158l9.714 5.978a1.5 1.5 0 001.572 0L22.5 6.908z"></path>
+                </svg>
+              ),
+              label: profile.email,
+              href: `mailto:${profile.email}`
+            },
+            {
+              icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style={{ width: '1.75rem', height: '1.75rem', color: '#68B2A0' }}>
+                  <path fillRule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd"></path>
+                </svg>
+              ),
+              label: profile.location
+            },
           ].map(({ icon, label, href }) => (
             <div
               key={label}
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem' }}
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', margin: '0.5rem 0' }}
             >
-              <span style={{ fontSize: '1.2rem', color: '#68B2A0' }}>{icon}</span>
+              <div className="animate-pulse-slow">{icon}</div>
               {href ? (
-                <a href={href} style={{ fontSize: '1rem', color: '#242424', textDecoration: 'none' }}>{label}</a>
+                <a href={href} style={{ fontSize: 'clamp(1rem, 2vw, 1.3rem)', color: '#242424', textDecoration: 'none' }}>{label}</a>
               ) : (
-                <p style={{ fontSize: '1rem', color: '#242424', margin: 0 }}>{label}</p>
+                <p style={{ fontSize: 'clamp(1rem, 2vw, 1.3rem)', color: '#242424', margin: 0 }}>{label}</p>
               )}
             </div>
           ))}
         </div>
-
-        {/* Form */}
-        <form
-          onSubmit={handleSubmit}
-          style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', alignItems: 'center' }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%' }}>
-            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
-              <input name="name" placeholder="Name" className="contactInput" type="text" required />
-              <input name="email" placeholder="Email" className="contactInput" type="email" required />
-            </div>
-            <input name="subject" placeholder="Subject" className="contactInput" type="text" style={{ width: '100%' }} />
-            <textarea
-              name="message"
-              placeholder="Message"
-              className="contactInput"
-              rows={4}
-              style={{ width: '100%', resize: 'vertical' }}
-            />
-          </div>
-          <button
-            type="submit"
-            style={{
-              background: '#68B2A0',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '0.5rem',
-              padding: '12px 40px',
-              fontWeight: 700,
-              fontSize: '1rem',
-              cursor: 'pointer',
-              transition: 'background 0.2s',
-            }}
-            onMouseEnter={(e) => { e.target.style.background = '#4a9a87' }}
-            onMouseLeave={(e) => { e.target.style.background = '#68B2A0' }}
-          >
-            Submit
-          </button>
-        </form>
       </div>
 
       {/* Footer scroll-to-top */}
