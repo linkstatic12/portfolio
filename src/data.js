@@ -96,10 +96,97 @@ export const skillGroups = [
 ]
 
 export const certifications = [
-  { name: 'Building with the Claude API', org: 'Anthropic', date: 'May 2026' },
-  { name: 'IBM AI Developer', org: 'IBM', date: 'Apr 2026' },
-  { name: 'IBM Data Science Specialization', org: 'IBM', date: 'Mar 2026' },
-  { name: 'EITCA/AI Certification Programme', org: 'EITCA', date: 'Nov 2025' },
+  { name: 'Claude with the Anthropic API', org: 'Anthropic', date: 'May 2026' },
+  { name: 'IBM AI Developer', org: 'IBM · Coursera', date: 'Apr 2026' },
+  { name: 'IBM Data Science', org: 'IBM · Coursera', date: 'Mar 2026' },
+  { name: 'Machine Learning with Python', org: 'IBM · Coursera', date: 'Mar 2026' },
+  {
+    name: 'EITCA/AI — Artificial Intelligence Programme',
+    org: 'EITCA, Brussels',
+    date: 'Nov 2025',
+    detail: '24 ECTS credits — umbrella academy credential covering the 10 EITC exams below',
+    components: [
+      { code: 'EITC/AI/ADL', label: 'Advanced Deep Learning', score: '80%' },
+      { code: 'EITC/AI/ARL', label: 'Advanced Reinforced Learning', score: '73.33%' },
+      { code: 'EITC/AI/DLTF', label: 'Deep Learning with TensorFlow', score: '86.67%' },
+      { code: 'EITC/AI/DLPTFK', label: 'Deep Learning w/ Python, TensorFlow & Keras', score: '86.67%' },
+      { code: 'EITC/AI/DLPP', label: 'Deep Learning with Python & PyTorch', score: '66.67%' },
+      { code: 'EITC/AI/MLP', label: 'Machine Learning with Python', score: '93.33%' },
+      { code: 'EITC/AI/TFF', label: 'TensorFlow Fundamentals', score: '80%' },
+      { code: 'EITC/AI/TFQML', label: 'TensorFlow Quantum Machine Learning', score: '73.33%' },
+      { code: 'EITC/AI/GCML', label: 'Google Cloud Machine Learning', score: '73.33%' },
+      { code: 'EITC/AI/GVAPI', label: 'Google Vision API', score: '66.67%' },
+    ],
+  },
+  {
+    name: 'EITC/CL/GCP — Google Cloud Platform',
+    org: 'EITCI, Brussels',
+    date: 'Nov 2025',
+    detail: 'Examination result: 73.33%',
+  },
+  {
+    name: 'EITC/CP/PPF — Python Programming Fundamentals',
+    org: 'EITCI, Brussels',
+    date: 'Oct 2025',
+    detail: 'Examination result: 66.67%',
+  },
+]
+
+export const projects = [
+  {
+    name: 'Nemotron-3 Reasoning Pipeline',
+    period: '2026',
+    summary:
+      'Full SFT + GRPO fine-tuning pipeline for NVIDIA\u2019s Nemotron-3 Nano (30B-A3B) Mamba-hybrid reasoning model, built for the NVIDIA Nemotron-3 Reasoning Challenge.',
+    details: [
+      'Stage 1 — supervised fine-tuning on gold puzzle answers with LoRA (rank 32) targeted at the Mamba-H SSM in_proj/out_proj/up_proj/down_proj layers.',
+      'Stage 2 — GRPO reinforcement learning with three reward signals: answer correctness, output-format compliance, and a length penalty.',
+      'Diagnosed and patched five Blackwell-SM-12.0-specific Triton/CUDA compilation bugs (RMSNorm fallback, ptxas path fix, Mamba3 stub, fast-path disable, Triton env spoofing) required to run on RTX PRO 6000 hardware.',
+      'Packaged and validated a submission adapter (safetensors + config) under a strict LoRA-rank constraint.',
+    ],
+    stack: ['LoRA', 'GRPO', 'TRL', 'PEFT', 'Nemotron-H', 'PyTorch', 'Blackwell/CUDA'],
+    github: 'https://github.com/linkstatic12/NVIDIA-nemotron-3-reasoning',
+  },
+  {
+    name: 'RSNA Knee Abnormality Detection',
+    period: '2026',
+    summary:
+      'Multi-arm visual foundation ensemble detecting 12 knee pathologies from multi-planar MRI, built for the RSNA 2026 Knee Abnormality Detection Challenge — 0.911+ on the public leaderboard.',
+    details: [
+      'Stage 1 — 20-member DINOv2 ViT-Small ensemble with 6-slot cross-attention over sagittal/coronal/axial sequences, deterministic DICOM geometry normalization, and 10-window sliding TTA with target-specific pooling.',
+      'Stage 2 — 5-fold cross-series spatial attention capturing inter-plane 3D alignment, rank-blended with the Stage 1 consensus.',
+      'Stage 3 — domain-specific RadImageNet ResNet-50 heads with selective per-target gating, strictly preserving Baker\u2019s cyst and fracture predictions from dilution.',
+      'Multilingual (English/German/Latin/French) NLP report-distillation engine converting free-text radiology reports into probabilistic soft labels.',
+    ],
+    stack: ['DINOv2', 'ResNet-50', 'Medical Imaging', 'DICOM', 'Ensemble Learning', 'NLP'],
+    github: 'https://github.com/linkstatic12/RNSA_knee_abormality_model',
+  },
+  {
+    name: 'ShariaGPT',
+    period: '2025 — 2026',
+    summary:
+      'Production RAG assistant answering Islamic finance questions grounded in Sharia source documents, built for financial institutions in the Middle East.',
+    details: [
+      'RAG pipeline over 8 Sharia finance references (Murabaha, Sukuk, Ijara, Mudaraba, Musharaka, Takaful, Riba, Zakat) served through FastAPI with Qdrant Cloud retrieval and GPT-4o-mini via OpenRouter.',
+      'Pre-LLM PII redaction (Emirates ID, IBAN, account numbers, phone, email) and stateful Redis-backed sessions.',
+      'Compliance tooling aligned with regional frameworks (UAE NESA, Saudi SAMA, PDPL/GDPR): audit logging, data-export, and right-to-be-forgotten endpoints.',
+      'Automated evaluation suite covering grounding accuracy, PII redaction, and off-topic refusal.',
+    ],
+    stack: ['RAG', 'FastAPI', 'Qdrant', 'Redis', 'OpenRouter', 'Compliance'],
+    github: 'https://github.com/linkstatic12/shariagpt',
+  },
+  {
+    name: 'Raspiwii',
+    period: 'Personal project',
+    summary:
+      'Python bridge between a Raspberry Pi and a MultiWii flight controller over serial/USB using the MultiWii Serial Protocol (MSP).',
+    details: [
+      'Reads and writes MSP frames over the flight controller\u2019s USB-serial link, enabling telemetry capture and control experiments directly from a Raspberry Pi.',
+      'Lightweight, dependency-light (pyserial) implementation aimed at engineers experimenting with flight-controller internals.',
+    ],
+    stack: ['Raspberry Pi', 'MultiWii / MSP', 'Serial Comms', 'Python'],
+    github: 'https://github.com/linkstatic12/Raspiwii',
+  },
 ]
 
 export const education = [
